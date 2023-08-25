@@ -1,0 +1,21 @@
+h1 {
+  color: blue;
+}
+
+h2 {
+  color: green;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid green;
+  width: 45%;
+  padding-left: 10px;
+}

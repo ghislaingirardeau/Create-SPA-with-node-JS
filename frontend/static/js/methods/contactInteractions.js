@@ -22,7 +22,10 @@ const showPhoneNumber = () => {
   let div = document.querySelector("#phoneBlock");
   buttonPhone.onclick = (event) => {
     show = !show;
-
+    show ? (div.style.height = "100px") : (div.style.height = "0px");
+  };
+  div.ontransitionstart = (event) => {
+    console.log("event start");
     if (show) {
       const p = document.createElement("p");
       const span = document.createElement("span");
@@ -35,12 +38,6 @@ const showPhoneNumber = () => {
       div.removeChild(div.querySelector("p"));
     }
   };
-  /* div.ontransitionend = (event) => {
-    contentToHide.style.opacity = 0;
-    show
-      ? (contentToHide.style.opacity = 1)
-      : (contentToHide.style.opacity = 0);
-  }; */
 
   //? WITH CSS
   /* let show = true;

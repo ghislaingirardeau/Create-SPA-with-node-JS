@@ -37,6 +37,9 @@ a[data-link] {
   text-decoration: none;
 }
 
-#phoneBlock > p {
+#phoneBlock {
+  height: 0px;
+  overflow: hidden;
   transition: all 1s ease;
+  background-color: red;
 }

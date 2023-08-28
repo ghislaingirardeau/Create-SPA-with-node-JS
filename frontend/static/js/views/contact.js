@@ -1,15 +1,25 @@
 import abstractView from "./abstractView.js";
 
 export default class extends abstractView {
-  constructor() {
-    super();
+  constructor(contactHeader) {
+    super(contactHeader);
     this.setTitle("Contact");
   }
-  async getHtml() {
+  async getHtml(layout) {
     return `
+    ${this[layout]}
+      <main>
         <h2>Contact me</h2>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi vitae mollitia illo officiis? Atque ut ab, ipsa, sed accusantium eveniet facere fuga dignissimos, ratione placeat officiis rerum dolorum eligendi voluptatum!</p>
-        <a href="/" data-link>Home</a>
+        <button type="button">Show phone number</button>
+        <span id="phoneNumber"></span>
+        <div class="contact-block">
+          <p id="contentToHide">Content to hide</p>
+          <a href="/" data-link>Home</a>
+        </div>
+        <div id="phoneBlock"></div>
+        
+        
+      </main>
         `;
   }
 }

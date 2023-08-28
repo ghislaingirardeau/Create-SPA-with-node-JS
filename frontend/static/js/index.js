@@ -1,7 +1,12 @@
-import aboutView from "./views/about.js";
 import homeView from "./views/home.js";
+import userView from "./views/user.js";
+import usersView from "./views/users.js";
+import errorView from "./views/error.js";
 import contactView from "./views/contact.js";
-import userView from "./views/userView.js";
+
+//? METHODS FOR EACH VIEWS ON MOUNT & AFTER
+import { loginUser } from "./methods/usersLogin.js";
+import { changeData } from "./methods/contactInteractions.js";
 
 const navigateTo = (url) => {
   history.pushState(null, null, url);
@@ -17,28 +22,39 @@ const loadContent = async () => {
     {
       path: "/",
       view: homeView,
-    },
-    {
-      path: "/about",
-      view: aboutView,
-    },
-    {
-      path: "/about/:id",
-      view: userView,
+      layout: "homeHeader", //! Envoie un layout speific
+      onMount: () => console.log("On mount home"),
     },
     {
       path: "/contact",
       view: contactView,
+      layout: "contactHeader", //! Envoie un layout speific
+      onMount: () => changeData(),
+    },
+    {
+      path: "/users",
+      view: usersView,
+      layout: "homeHeader",
+      onMount: () => loginUser(navigateTo),
+    },
+    {
+      path: "/user/:id",
+      view: userView,
+      layout: "homeHeader",
+      onMount: () => console.log("On mount user"),
     },
   ];
   let match = routes.find((route) =>
     location.pathname.match(pathRoRegex(route.path))
   );
   if (!match) {
-    return (loadContent.innerHTML = "<h2>Page Not Found</h2>");
+    const view = new errorView();
+    return (loadContent.innerHTML = await view.getHtml());
   }
   const view = new match.view();
-  loadContent.innerHTML = await view.getHtml();
+  loadContent.innerHTML = await view.getHtml(match.layout);
+
+  match.onMount();
 };
 
 //* For the back and forward arrow on window

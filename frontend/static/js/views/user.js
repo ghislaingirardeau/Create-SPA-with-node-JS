@@ -5,16 +5,20 @@ export default class extends abstractView {
     super();
     this.setTitle("User");
   }
-  async getHtml() {
-    const idUser = location.pathname.replace("/about/", "");
+  async getHtml(layout) {
+    const idUser = location.pathname.replace("/user/", "");
     let user = JSON.parse(sessionStorage.getItem("users")).find(
       (user) => user.id == idUser
     );
     console.log(user);
     return `
+    ${this[layout]}
         <h2>User page</h2>
-        <pre>${JSON.stringify(user)}</pre>
-        <a href="/about" data-link>users</a>
+        <div class="card">
+          <h3>${user.username}</h3>
+          <p>${user.email}</p>
+        </div>
+        <a href="/users" data-link>Users</a>
         `;
   }
 }

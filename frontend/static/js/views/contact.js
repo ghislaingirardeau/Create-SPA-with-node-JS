@@ -1,5 +1,8 @@
 import abstractView from "./abstractView.js";
 
+/**
+ * @module Contact
+ */
 export default class extends abstractView {
   constructor(contactHeader) {
     super(contactHeader);

@@ -16,6 +16,18 @@ div {
   border: 2px solid grey;
 }
 
+header {
+  margin-bottom: 5px;
+  padding: 5px;
+  border-bottom: 2px solid blue;
+}
+
+footer {
+  margin-top: 5px;
+  padding: 5px;
+  border-top: 2px solid blue;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;

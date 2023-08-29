@@ -5,7 +5,7 @@ export const mountHome = () => {
   showFromComponent();
 };
 
-const showStore = () => {
+const showStore = (somebody) => {
   const { value } = window.Store;
   const p = document.querySelector("#storeValue");
   p.innerHTML = `Store value change in state route to ${value}`;

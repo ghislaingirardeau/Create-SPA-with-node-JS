@@ -5,7 +5,7 @@ export default class extends abstractView {
     super(homeHeader);
     this.setTitle("Users");
   }
-  async getHtml(layout) {
+  async getHtml(header) {
     let usersToHtml = [];
     let loader = true;
     try {
@@ -17,11 +17,11 @@ export default class extends abstractView {
         sessionStorage.setItem("users", JSON.stringify(users));
         users.forEach((element) => {
           usersToHtml.push(`<div class="card">
-      <h3>${element.name}</h3>
-      <p>User name: ${element.username}</p>
-      <p>@email: ${element.email}</p>
-      <a href="/user/${element.id}" data-link>Details</a>
-      </div>`);
+            <h3>${element.name}</h3>
+            <p>User name: ${element.username}</p>
+            <p>@email: ${element.email}</p>
+            <a href="/user/${element.id}" data-link>Details</a>
+            </div>`);
         });
       }
     } catch (error) {
@@ -29,7 +29,7 @@ export default class extends abstractView {
       console.log(error);
     }
     return `
-    ${this[layout]}
+    ${this[header]}
     <main>
       <h2>Login</h2>
       <form id="submitForm">

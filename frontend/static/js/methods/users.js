@@ -1,4 +1,4 @@
-export const loginUser = (navigateTo) => {
+export const mountUsers = (navigateTo) => {
   let form = document.querySelector("#submitForm");
   if (form) {
     const button = form.querySelector("[type='button']");

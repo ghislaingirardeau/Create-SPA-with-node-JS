@@ -5,9 +5,11 @@ export default class extends abstractView {
     super(contactHeader);
     this.setTitle("Contact");
   }
-  async getHtml(layout) {
+  async getHtml(header) {
+    const state = window.State;
+    console.log(state);
     return `
-    ${this[layout]}
+    ${this[header]}
       <main>
         <h2>Contact me</h2>
         <button type="button">Show phone number</button>

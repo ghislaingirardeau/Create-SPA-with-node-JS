@@ -3,10 +3,15 @@ import userView from "./views/user.js";
 import usersView from "./views/users.js";
 import errorView from "./views/error.js";
 import contactView from "./views/contact.js";
+import stateView from "./views/state.js";
 
 //? METHODS FOR EACH VIEWS ON MOUNT & AFTER
-import { loginUser } from "./methods/usersLogin.js";
-import { changeData } from "./methods/contactInteractions.js";
+import { mountHome } from "./methods/home.js";
+import { mountUsers } from "./methods/users.js";
+import { mountContact } from "./methods/contact.js";
+import { mountUser } from "./methods/user.js";
+import { mountState } from "./methods/state.js";
+import { mountError } from "./methods/error.js";
 
 const navigateTo = (url) => {
   history.pushState(null, null, url);
@@ -22,26 +27,32 @@ const loadContent = async () => {
     {
       path: "/",
       view: homeView,
-      layout: "homeHeader", //! Envoie un layout speific
-      onMount: () => console.log("On mount home"),
+      layout: "homeHeader", //! Envoie un layout specific
+      afterMount: () => mountHome(),
     },
     {
       path: "/contact",
       view: contactView,
-      layout: "contactHeader", //! Envoie un layout speific
-      onMount: () => changeData(),
+      layout: "contactHeader", //! Envoie un layout specific
+      afterMount: () => mountContact(),
+    },
+    {
+      path: "/state",
+      view: stateView,
+      layout: "homeHeader", //! Envoie un layout specific
+      afterMount: () => mountState(),
     },
     {
       path: "/users",
       view: usersView,
       layout: "homeHeader",
-      onMount: () => loginUser(navigateTo),
+      afterMount: () => mountUsers(navigateTo),
     },
     {
       path: "/user/:id",
       view: userView,
       layout: "homeHeader",
-      onMount: () => console.log("On mount user"),
+      afterMount: () => mountUser(),
     },
   ];
   let match = routes.find((route) =>
@@ -49,12 +60,13 @@ const loadContent = async () => {
   );
   if (!match) {
     const view = new errorView();
-    return (loadContent.innerHTML = await view.getHtml());
+    loadContent.innerHTML = await view.getHtml();
+    return mountError();
   }
   const view = new match.view();
   loadContent.innerHTML = await view.getHtml(match.layout);
 
-  match.onMount();
+  match.afterMount();
 };
 
 //* For the back and forward arrow on window

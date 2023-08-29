@@ -7,8 +7,9 @@ export default class extends abstractView {
   }
   async getHtml() {
     return `
-        <h2>PAGE NOT FOUND</h2>
-        <a href="/" data-link>Back Home</a>
+        <main>
+          
+        </main>
         `;
   }
 }

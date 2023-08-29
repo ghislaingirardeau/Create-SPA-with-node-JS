@@ -1,4 +1,4 @@
-export const changeData = () => {
+export const mountContact = () => {
   console.log("execute this on mount");
 
   //* then load the event listeners

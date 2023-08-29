@@ -6,6 +6,16 @@ h2 {
   color: green;
 }
 
+h3 {
+  color: red;
+}
+
+div {
+  margin-block: 20px;
+  padding: 5px;
+  border: 2px solid grey;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -42,4 +52,18 @@ a[data-link] {
   overflow: hidden;
   transition: all 1s ease;
   background-color: red;
+}
+
+.userCard {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding-left: 10px;
+}
+
+.loader {
+  height: 5px;
+  width: 5px;
+  background-color: red;
+  border-radius: 50% 50%;
 }

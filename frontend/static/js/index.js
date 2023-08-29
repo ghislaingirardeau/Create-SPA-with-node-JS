@@ -18,43 +18,31 @@ const navigateTo = (url) => {
   loadContent();
 };
 
+class Route {
+  constructor(path, view, layout, callback) {
+    (this.path = path),
+      (this.view = view),
+      (this.layout = layout), //! Envoie un layout specific
+      (this.callback = callback);
+  }
+  afterMount(params = navigateTo) {
+    return this.callback(params);
+  }
+}
+
 const pathRoRegex = (path) =>
   new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
 const loadContent = async () => {
   const loadContent = document.getElementById("app");
   const routes = [
-    {
-      path: "/",
-      view: homeView,
-      layout: "homeHeader", //! Envoie un layout specific
-      afterMount: () => mountHome(),
-    },
-    {
-      path: "/contact",
-      view: contactView,
-      layout: "contactHeader", //! Envoie un layout specific
-      afterMount: () => mountContact(),
-    },
-    {
-      path: "/state",
-      view: stateView,
-      layout: "homeHeader", //! Envoie un layout specific
-      afterMount: () => mountState(),
-    },
-    {
-      path: "/users",
-      view: usersView,
-      layout: "homeHeader",
-      afterMount: () => mountUsers(navigateTo),
-    },
-    {
-      path: "/user/:id",
-      view: userView,
-      layout: "homeHeader",
-      afterMount: () => mountUser(),
-    },
+    new Route("/", homeView, "homeHeader", mountHome),
+    new Route("/contact", contactView, "contactHeader", mountContact),
+    new Route("/state", stateView, "homeHeader", mountState),
+    new Route("/users", usersView, "homeHeader", mountUsers),
+    new Route("/user/:id", userView, "homeHeader", mountUser),
   ];
+  console.log(routes);
   let match = routes.find((route) =>
     location.pathname.match(pathRoRegex(route.path))
   );

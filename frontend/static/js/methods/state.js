@@ -1,6 +1,4 @@
-import useForm from "../components/form.js";
-
-export const mountState = () => {
+export const mountState = async () => {
   const state = window.Store;
   const btnIncrement = document.querySelector("#increment");
   const btnDecrement = document.querySelector("#decrement");
@@ -16,7 +14,12 @@ export const mountState = () => {
     span.innerHTML = `Counter: ${state.value}`;
   };
   span.innerHTML = `Counter: ${state.value}`;
+  showFromComponent();
+};
 
+const showFromComponent = async () => {
+  //? IMPORT FORM DYNAMICALLY TO BE LAZY LOAD
+  const { useForm } = await import("../components/form.js");
   const newFrom = new useForm("#formBlock", ["Email", "Password"]);
   newFrom.render();
   newFrom.submit();

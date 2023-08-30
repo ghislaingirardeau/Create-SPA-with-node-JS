@@ -1,18 +1,10 @@
-import useForm from "../components/form.js";
-
 export const mountHome = () => {
   showStore();
-  showFromComponent();
 };
 
-const showStore = (somebody) => {
-  const { value } = window.Store;
+const showStore = () => {
+  const { value, user } = window.Store;
+  console.log(user);
   const p = document.querySelector("#storeValue");
-  p.innerHTML = `Store value change in state route to ${value}`;
-};
-
-const showFromComponent = () => {
-  const newFrom = new useForm("#formBlock", ["Name", "Email"]);
-  newFrom.render();
-  newFrom.submit();
+  p.innerHTML = `Store value change in state route to <strong>${value}</strong>`;
 };

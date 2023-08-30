@@ -3,21 +3,28 @@ export const mountContact = () => {
 
   //* then load the event listeners
   showPhoneNumber();
+  showFromComponent();
 };
 
 const showPhoneNumber = () => {
   let buttonPhone = document.querySelector("[type='button']");
 
-  //? ADD OR REMOVE INNERHTML
-  /* buttonPhone.onclick = (event) => {
-    let elementPhoneNumber = document.querySelector("#phoneNumber");
-    console.log(elementPhoneNumber.textContent);
-    elementPhoneNumber.innerHTML.length === 0
-      ? (elementPhoneNumber.innerHTML = "0123 456 789")
-      : (elementPhoneNumber.innerHTML = "");
-  }; */
-
   //? ADD OR REMOVE NODE ELEMENT
+  buildElement(buttonPhone);
+
+  //? WITH CSS
+  /* usingCSS(buttonPhone); */
+};
+
+const showFromComponent = async () => {
+  //? IMPORT FORM DYNAMICALLY TO BE LAZY LOAD
+  const { useForm } = await import("../components/form.js");
+  const newFrom = new useForm("#formBlock", ["Email", "Password"]);
+  newFrom.render();
+  newFrom.submit();
+};
+
+const buildElement = (buttonPhone) => {
   let show = false;
   let div = document.querySelector("#phoneBlock");
   buttonPhone.onclick = (event) => {
@@ -38,9 +45,10 @@ const showPhoneNumber = () => {
       div.removeChild(div.querySelector("p"));
     }
   };
+};
 
-  //? WITH CSS
-  /* let show = true;
+const usingCSS = (buttonPhone) => {
+  let show = true;
   let contentToHide = document.querySelector("#contentToHide");
   buttonPhone.onclick = (event) => {
     show = !show;
@@ -59,5 +67,5 @@ const showPhoneNumber = () => {
     show
       ? (contentToHide.style.opacity = 1)
       : (contentToHide.style.opacity = 0);
-  }; */
+  };
 };

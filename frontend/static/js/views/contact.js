@@ -9,8 +9,6 @@ export default class extends abstractView {
     this.setTitle("Contact");
   }
   async getHtml(header) {
-    const state = window.State;
-    console.log(state);
     return `
     ${this[header]}
       <main>
@@ -18,10 +16,12 @@ export default class extends abstractView {
         <button type="button">Show phone number</button>
         <span id="phoneNumber"></span>
         <div class="contact-block">
-          <p id="contentToHide">Content to hide</p>
+          <p id="contentToHide">Hide Using CSS</p>
           <a href="/" data-link>Home</a>
         </div>
-        <div id="phoneBlock"></div>
+        <div id="phoneBlock">
+          <div id="formBlock"></div>
+        </div>
         
         
       </main>

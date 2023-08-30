@@ -1,6 +1,6 @@
 import abstractView from "./abstractView.js";
 
-export default class extends abstractView {
+export const errorView = class extends abstractView {
   constructor() {
     super();
     this.setTitle("Error");
@@ -21,4 +21,4 @@ export default class extends abstractView {
       </footer>
         `;
   }
-}
+};

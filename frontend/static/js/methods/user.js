@@ -17,6 +17,8 @@ export const mountUser = async () => {
     );
     const user = await rawDatas.json();
     if (Object.values(user).length > 0) {
+      const store = window.Store;
+      store.userConnected(user)
       animeElementDiv(div);
       div.innerHTML = `<h3>${user.name}</h3><p>Name ${user.username}</p><p>Email: ${user.email}</p>`;
       /* animLoader.pause(); */

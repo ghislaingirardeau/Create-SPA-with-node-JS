@@ -14,7 +14,6 @@ export default class extends abstractView {
           <h2>Welcome to mySPA</h2>
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi vitae mollitia illo officiis? Atque ut ab, ipsa, sed accusantium eveniet facere fuga dignissimos, ratione placeat officiis rerum dolorum eligendi voluptatum!</p>
           <p id="storeValue"></p>
-          <div id="formBlock"></div>
           </main>
     `;
   }

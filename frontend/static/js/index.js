@@ -2,7 +2,6 @@
 import homeView from "./views/home.js";
 import userView from "./views/user.js";
 import usersView from "./views/users.js";
-import errorView from "./views/error.js";
 import contactView from "./views/contact.js";
 import stateView from "./views/state.js";
 
@@ -12,7 +11,6 @@ import { mountUsers } from "./methods/users.js";
 import { mountContact } from "./methods/contact.js";
 import { mountUser } from "./methods/user.js";
 import { mountState } from "./methods/state.js";
-import { mountError } from "./methods/error.js";
 
 //* Nous permet de naviguer entre les routes sans charger la page
 const navigateTo = (url) => {
@@ -22,9 +20,8 @@ const navigateTo = (url) => {
 
 class Route {
   /**
-   *
    * @param {string} path - la route
-   * @param {object} view - la class view importé
+   * @param {class} view - la class view importé
    * @param {string} layout - Envoie un layout specific
    * @param {function} callback - la methods importé after mount view
    * @param {function} params - parametre de la callback si besoin
@@ -68,8 +65,11 @@ const loadContent = async () => {
 
   //* Si pas de match, envoie la route error et return
   if (!match) {
+    //* IMPORT DYNAMIC ERROR FOR LAZY LOAD
+    const { errorView } = await import("./views/error.js");
     const view = new errorView();
     loadContent.innerHTML = await view.getHtml();
+    const { mountError } = await import("./methods/error.js");
     return mountError();
   }
 

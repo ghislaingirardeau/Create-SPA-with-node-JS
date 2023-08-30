@@ -6,6 +6,7 @@ export const homeHeader = `
     <a href="/users" data-link>Users</a>
     <a href="/contact" data-link>Contact</a>
     <a href="/state" data-link>State</a>
+    <a href="/abc" data-link>Error</a>
   </nav>
 </header>`;
 

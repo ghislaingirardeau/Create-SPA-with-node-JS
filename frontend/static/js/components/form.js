@@ -1,4 +1,4 @@
-export default class Form {
+export const useForm = class Form {
   constructor(element, array) {
     this.element = document.querySelector(element);
     this.array = array;
@@ -22,4 +22,4 @@ export default class Form {
       console.log(data.getAll("name"));
     };
   }
-}
+};

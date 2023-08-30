@@ -5,7 +5,7 @@ export default class extends abstractView {
     super(homeHeader);
     this.setTitle("State");
   }
-  async getHtml(header) {
+  async mountView(header) {
     return `
         ${this[header]}
         <main>        
@@ -17,4 +17,36 @@ export default class extends abstractView {
         </main>
     `;
   }
+  async afterViewMount() {
+    //! Une fois le template de la vue mounted, éxécute le script suivant
+    //!pour rendre la page dynamique, ajout d'event, fetch data...
+    useStore();
+  }
 }
+
+const showFromComponent = async () => {
+  //? IMPORT FORM DYNAMICALLY TO BE LAZY LOAD
+  const { useForm } = await import("../components/form.js");
+  const newFrom = new useForm("#formBlock", ["Email", "Password"]);
+  newFrom.render();
+  newFrom.submit();
+};
+
+const useStore = () => {
+  const state = window.Store;
+  const btnIncrement = document.querySelector("#increment");
+  const btnDecrement = document.querySelector("#decrement");
+  const counterBlock = document.querySelector("#counterBlock");
+  const span = document.createElement("span");
+  counterBlock.appendChild(span);
+  btnIncrement.onclick = (e) => {
+    state.increment();
+    span.innerHTML = `Counter: ${state.value}`;
+  };
+  btnDecrement.onclick = (e) => {
+    state.decrement();
+    span.innerHTML = `Counter: ${state.value}`;
+  };
+  span.innerHTML = `Counter: ${state.value}`;
+  showFromComponent();
+};

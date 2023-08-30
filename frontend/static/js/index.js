@@ -53,8 +53,8 @@ const loadContent = async () => {
     const { errorView } = await import("./views/error.js");
     const view = new errorView();
     loadContent.innerHTML = await view.mountView();
-    const { mountError } = await import("./methods/error.js");
-    return mountError();
+    await view.afterViewMount();
+    return;
   }
 
   //* Si un match, charge la class dans une view puis injecte le HTML

@@ -4,13 +4,13 @@ import abstractView from "./abstractView.js";
  * @module Contact
  */
 export default class extends abstractView {
-  constructor(contactHeader) {
-    super(contactHeader);
+  constructor() {
+    super();
     this.setTitle("Contact");
   }
   async mountView(header) {
     return `
-    ${this[header]}
+    ${this.headers[header]}
       <main>
         <h2>Contact me</h2>
         <button type="button">Show phone number</button>

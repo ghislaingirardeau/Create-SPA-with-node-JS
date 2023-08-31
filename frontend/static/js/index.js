@@ -5,26 +5,14 @@ import usersView from "./views/users.js";
 import contactView from "./views/contact.js";
 import stateView from "./views/state.js";
 
+//? IMPORT ROUTE CLASS
+import { routeClass } from "./routes/route.js";
+
 //* Nous permet de naviguer entre les routes sans charger la page
 const navigateTo = (url) => {
   history.pushState(null, null, url);
   loadContent();
 };
-
-class Route {
-  /**
-   * @param {string} path - la route
-   * @param {class} view - la class view importé
-   * @param {string} layout - Envoie un layout specific
-   * @param {function} params - parametre de la callback si besoin
-   */
-  constructor(path, view, layout, params = null) {
-    (this.path = path),
-      (this.view = view),
-      (this.layout = layout),
-      (this.params = params);
-  }
-}
 
 //* pour vérifier si une route match
 const pathRoRegex = (path) =>
@@ -35,11 +23,11 @@ const loadContent = async () => {
 
   //* charges toutes les routes possibles
   const routes = [
-    new Route("/", homeView, "homeHeader"),
-    new Route("/contact", contactView, "contactHeader"),
-    new Route("/state", stateView, "homeHeader"),
-    new Route("/users", usersView, "homeHeader", navigateTo),
-    new Route("/user/:id", userView, "homeHeader"),
+    new routeClass("/", homeView, "homeHeader"),
+    new routeClass("/contact", contactView, "contactHeader"),
+    new routeClass("/state", stateView, "homeHeader"),
+    new routeClass("/users", usersView, "homeHeader", navigateTo),
+    new routeClass("/user/:id", userView, "homeHeader"),
   ];
 
   //* Récupère la route si path = à la location.path
@@ -57,11 +45,10 @@ const loadContent = async () => {
     return;
   }
 
-  //* Si un match, charge la class dans une view puis injecte le HTML
+  //* Si un match, créer une nouvelle instance de la view correspondante puis mount html
   const view = new match.view();
   loadContent.innerHTML = await view.mountView(match.layout);
-
-  //* Une fois la vue chargé, lance le JS (méthods) spécific à cette vue
+  //* Une fois la vue chargé, lance le JS (méthods) spécific à cette vue: fetch, event, dynamic content...
   await view.afterViewMount(match.params);
 };
 

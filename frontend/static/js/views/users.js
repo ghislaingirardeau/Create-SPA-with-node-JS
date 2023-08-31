@@ -1,8 +1,8 @@
 import abstractView from "./abstractView.js";
 
 export default class extends abstractView {
-  constructor(homeHeader) {
-    super(homeHeader);
+  constructor() {
+    super();
     this.setTitle("Users");
   }
   async mountView(header) {
@@ -29,7 +29,7 @@ export default class extends abstractView {
       console.log(error);
     }
     return `
-    ${this[header]}
+    ${this.headers[header]}
     <main>
       <h2>Login</h2>
       <form id="submitForm">

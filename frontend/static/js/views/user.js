@@ -7,7 +7,7 @@ export default class extends abstractView {
   }
   async mountView(header) {
     return `
-    ${this[header]}
+    ${this.headers[header]}
         <h2>User page</h2>
         <div class="userCard">
         </div>

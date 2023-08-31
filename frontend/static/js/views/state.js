@@ -1,13 +1,13 @@
 import abstractView from "./abstractView.js";
 
 export default class extends abstractView {
-  constructor(homeHeader) {
-    super(homeHeader);
+  constructor() {
+    super();
     this.setTitle("State");
   }
   async mountView(header) {
     return `
-        ${this[header]}
+        ${this.headers[header]}
         <main>        
           <h2>State</h2>
           <button type="button" id="increment">Increment</button>

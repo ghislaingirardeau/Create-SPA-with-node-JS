@@ -2,8 +2,10 @@ import { homeHeader, contactHeader } from "../layout/headers.js";
 
 export default class {
   constructor() {
-    this.homeHeader = homeHeader;
-    this.contactHeader = contactHeader;
+    this.headers = {
+      homeHeader,
+      contactHeader,
+    };
   }
   //* Communs functions use for each views */
   setTitle(title) {

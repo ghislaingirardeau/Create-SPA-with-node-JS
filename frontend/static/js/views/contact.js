@@ -11,7 +11,7 @@ export default class extends abstractView {
   async mountView(header) {
     return `
     ${this.headers[header]}
-      <main>
+      <section>
         <h2>Contact me</h2>
         <button type="button">Show phone number</button>
         <span id="phoneNumber"></span>
@@ -24,7 +24,8 @@ export default class extends abstractView {
         </div>
         
         
-      </main>
+      </section>
+      ${this.footer}
         `;
   }
   async afterViewMount() {

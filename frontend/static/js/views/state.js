@@ -8,19 +8,23 @@ export default class extends abstractView {
   async mountView(header) {
     return `
         ${this.headers[header]}
-        <main>        
+        <section>        
           <h2>State</h2>
           <button type="button" id="increment">Increment</button>
         <button type="button" id="decrement">Decrement</button>
         <div id="counterBlock"></div>
         <div id="formBlock"></div>
-        </main>
+        </section>
+        ${this.footer}
     `;
   }
   async afterViewMount() {
     //! Une fois le template de la vue mounted, éxécute le script suivant
     //!pour rendre la page dynamique, ajout d'event, fetch data...
     useStore();
+    setTimeout(() => {
+      console.log(document.forms);
+    }, 500);
   }
 }
 

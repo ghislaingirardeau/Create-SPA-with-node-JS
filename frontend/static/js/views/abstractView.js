@@ -1,4 +1,5 @@
 import { homeHeader, contactHeader } from "../layout/headers.js";
+import { footerGlobal } from "../layout/footer.js";
 
 export default class {
   constructor() {
@@ -6,6 +7,7 @@ export default class {
       homeHeader,
       contactHeader,
     };
+    this.footer = footerGlobal();
   }
   //* Communs functions use for each views */
   setTitle(title) {

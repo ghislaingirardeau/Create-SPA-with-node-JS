@@ -11,6 +11,7 @@ export default class extends abstractView {
         <h2>User page</h2>
         <div class="userCard">
         </div>
+        ${this.footer}
         `;
   }
   async afterViewMount() {
@@ -26,7 +27,12 @@ export default class extends abstractView {
       const user = await rawDatas.json();
       if (Object.values(user).length > 0) {
         storeUser(user);
-        animeElementDiv(div);
+        const animCard = animeElementDiv(div);
+        animCard.onfinish = (event) => {
+          console.log("loader finish");
+        };
+        console.log(animCard.id);
+        console.log(document.getAnimations());
         div.innerHTML = `<h3>${user.name}</h3><p>Name ${user.username}</p><p>Email: ${user.email}</p>`;
         cardElement.removeChild(p);
       } else {
@@ -75,7 +81,9 @@ const animeElementDiv = (element) => {
   const loaderSpinning = [{ opacity: 0 }, { opacity: 1 }];
 
   const loaderTiming = {
+    id: "textAnim",
     duration: 1000,
   };
+
   return element.animate(loaderSpinning, loaderTiming);
 };

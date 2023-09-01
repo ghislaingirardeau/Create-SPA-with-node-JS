@@ -6,7 +6,7 @@ import contactView from "./views/contact.js";
 import stateView from "./views/state.js";
 
 //? IMPORT ROUTE CLASS
-import { routeClass } from "./routes/route.js";
+import routeClass from "./routes/route.js";
 
 //* Nous permet de naviguer entre les routes sans charger la page
 const navigateTo = (url) => {
@@ -58,11 +58,15 @@ window.addEventListener("popstate", loadContent);
 //* listen to the document on load
 document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("click", (e) => {
+    e.preventDefault(); // empeche le chargement
     //* si l'élément correspond au selector data-link
     if (e.target.matches("a[data-link]")) {
       //! pour ne pas que la page se recharge durant la navigation
-      e.preventDefault(); // empeche le chargement
+
       navigateTo(e.target.href); // utilise la fonction navigate
+    } else if (e.target.matches("a[data-link-go-back]")) {
+      console.log(e.target);
+      history.back();
     }
   });
   // on load, load content depending on the route

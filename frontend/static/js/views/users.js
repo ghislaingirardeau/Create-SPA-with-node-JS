@@ -30,7 +30,7 @@ export default class extends abstractView {
     }
     return `
     ${this.headers[header]}
-    <main>
+    <section>
       <h2>Login</h2>
       <form id="submitForm">
       <input type="email" name="email">
@@ -49,7 +49,8 @@ export default class extends abstractView {
 
       
       <a href="/" data-link>Home</a>
-    </main>
+    </section>
+    ${this.footer}
         `;
   }
   async afterViewMount(navigateTo) {

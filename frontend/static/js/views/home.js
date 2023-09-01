@@ -9,14 +9,17 @@ export default class extends abstractView {
   async mountView(header) {
     //! Je mets les elements statics du site ici ou tag html global
     //! Une fois mounted, j'intéragis avec le DOM via les methods
+
+    //* recupere le template et copie le template pour ensuite l'afficher
+    const templateHome = document
+      .querySelector("#templateHomeView")
+      .cloneNode(true);
+
+
     return `
         ${this.headers[header]}
-        <main>        
-          <h2>Welcome to mySPA</h2>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi vitae mollitia illo officiis? Atque ut ab, ipsa, sed accusantium eveniet facere fuga dignissimos, ratione placeat officiis rerum dolorum eligendi voluptatum!</p>
-          <p id="storeValue"></p>
-          <pre id="storeUser"></pre>
-          </main>
+        ${templateHome.innerHTML}
+        ${this.footer}
     `;
   }
   async afterViewMount() {

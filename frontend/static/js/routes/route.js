@@ -1,4 +1,4 @@
-export const routeClass = class Route {
+export default class routeClass {
   /**
    * @param {string} path - la route
    * @param {class} view - la class view importé
@@ -11,4 +11,4 @@ export const routeClass = class Route {
       (this.layout = layout),
       (this.params = params);
   }
-};
+}

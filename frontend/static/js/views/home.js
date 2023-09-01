@@ -23,6 +23,11 @@ export default class extends abstractView {
     //! Une fois le template de la vue mounted, éxécute le script suivant
     //!pour rendre la page dynamique, ajout d'event, fetch data...
     showStore();
+    //? Get cookies
+    let p = document.createElement("p");
+    document.querySelector("#storeUser").after(p);
+    p.innerHTML = `Cookie send from server: ${getCookie("cookieUser")}`;
+    /* setCookie("Hello", "cookie from client", 1); */
   }
 }
 
@@ -38,3 +43,26 @@ const showStore = () => {
       ? `User: ${JSON.stringify(user)}`
       : `No user connected`;
 };
+
+const getCookie = (params) => {
+  let cookies = document.cookie.split("; ");
+  let cookie = cookies.find((c) => c.startsWith(params))?.split("=")[1];
+  return cookie === undefined ? null : decodeURIComponent(cookie);
+};
+
+/**
+ *
+ * @param {string} name
+ * @param {string} value
+ * @param {number} days
+ */
+function setCookie(name, value, days) {
+  if (getCookie(name)) {
+    return;
+  }
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  document.cookie = `${name}=${encodeURIComponent(
+    value
+  )}; expires=${date.toUTCString()}`;
+}

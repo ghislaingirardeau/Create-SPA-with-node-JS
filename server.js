@@ -3,6 +3,7 @@ const path = require("path");
 const app = express();
 const routeDynamic = require("./router");
 const port = 3000;
+const cookieParser = require("cookie-parser");
 
 // TO GET AUTO COMPLETION FOR EXPRESS
 /** @type {import("express").RequestHandler} */
@@ -31,6 +32,8 @@ app.use(
   "/static",
   express.static(path.resolve(__dirname, "frontend", "static"))
 );
+
+app.use(cookieParser("MY SECRET"));
 
 app.use("", routeDynamic);
 
